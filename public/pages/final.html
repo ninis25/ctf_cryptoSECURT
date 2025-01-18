@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Boss: Gigachad - CryptoHack 2077</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/neon.css">
+</head>
+<body class="cyberpunk-bg">
+    <div class="challenge-container">
+        <h1 class="glitch-text" data-text="Final_Boss:_Gigachad">Final_Boss: Gigachad</h1>
+        
+        <div class="challenge-content neon-border">
+            <p class="challenge-description">
+                POV: Tu dois décoder ce message en Base64 puis le reverse
+                <br>
+                Emotional damage incoming bestie 💀
+            </p>
+            
+            <div class="encrypted-message">
+                ZGV2b3JwcGFfZGFoY2FnaWd7RlRD
+            </div>
+
+            <div class="flag-submission">
+                <input type="text" id="flagInput" class="neon-input" placeholder="CTF{flag}">
+                <button onclick="submitFlag()" class="neon-button">Submit Flag</button>
+            </div>
+
+            <div id="result" class="result-message"></div>
+
+            <div class="challenge-navigation">
+                <a href="../index.html" class="neon-button menu-button">
+                    <span class="button-icon">←</span>
+                    <span class="button-text">Menu principal</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function submitFlag() {
+            const flagInput = document.getElementById('flagInput');
+            const resultDiv = document.getElementById('result');
+            
+            try {
+                const response = await fetch('/api/verify/final', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ flag: flagInput.value })
+                });
+                
+                const data = await response.json();
+                
+                resultDiv.textContent = data.message;
+                resultDiv.className = `result-message ${data.success ? 'success' : 'error'}`;
+                
+                if (data.success) {
+                    resultDiv.innerHTML += '<br>🔥 ABSOLUTE GIGACHAD DETECTED 🔥';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                resultDiv.textContent = "Server skill issue bestie 😭";
+                resultDiv.className = 'result-message error';
+            }
+        }
+    </script>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+</body>
+</html> 

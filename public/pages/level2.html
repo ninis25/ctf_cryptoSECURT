@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 2: Real - CryptoHack 2077</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/neon.css">
+</head>
+<body class="cyberpunk-bg">
+    <div class="challenge-container">
+        <h1 class="glitch-text" data-text="Level_2:_Real">Level_2: Real</h1>
+        
+        <div class="challenge-content neon-border">
+            <p class="challenge-description">
+                Common L pour ceux qui comprennent pas Vigenère fr fr...
+                <br>
+                La clé? Elle est cachée dans ce ratio: "NPCNPCNPC"
+            </p>
+            
+            <div class="encrypted-message">
+                HGY{pbzzbf_Y_orfgvr_se_se}
+            </div>
+
+            <div class="flag-submission">
+                <input type="text" id="flagInput" class="neon-input" placeholder="CTF{flag}">
+                <button onclick="submitFlag()" class="neon-button">Submit Flag</button>
+            </div>
+
+            <div id="result" class="result-message"></div>
+
+            <div class="challenge-navigation">
+                <a href="../index.html" class="neon-button menu-button">
+                    <span class="button-icon">←</span>
+                    <span class="button-text">Menu principal</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function submitFlag() {
+            const flagInput = document.getElementById('flagInput');
+            const resultDiv = document.getElementById('result');
+            
+            const result = await window.verifyFlag('level2', flagInput.value);
+            
+            resultDiv.textContent = result.message;
+            resultDiv.className = `result-message ${result.success ? 'success' : 'error'}`;
+            
+            if (result.success) {
+                resultDiv.innerHTML += '<br>🔥 BASED AND REDPILLED 🔥';
+            }
+        }
+    </script>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+</body>
+</html> 

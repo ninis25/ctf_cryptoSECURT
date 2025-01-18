@@ -1,0 +1,8 @@
+{
+    "current": "NPC = clé de Vigenère bestie... t'as capté?",
+    "hints": [
+        "La clé se répète: NPC NPC NPC...",
+        "Vigenère c'est comme César mais avec plusieurs décalages",
+        "Common L si tu utilises pas dcode.fr"
+    ]
+} 

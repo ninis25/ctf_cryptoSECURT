@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 1: Ez Clap - CryptoHack 2077</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/neon.css">
+</head>
+<body>
+    <!-- SVG Patterns -->
+    <svg style="width:0;height:0;position:absolute;" aria-hidden="true">
+        <pattern id="cyber-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0,255,255,0.1)" stroke-width="1"/>
+        </pattern>
+        
+        <filter id="glitch">
+            <feColorMatrix in="SourceGraphic" mode="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
+            <feOffset in="r" dx="2" dy="-2" result="r_offset"/>
+            <feColorMatrix in="SourceGraphic" mode="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
+            <feOffset in="g" dx="-2" dy="2" result="g_offset"/>
+            <feColorMatrix in="SourceGraphic" mode="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
+            <feOffset in="b" dx="0" dy="0" result="b_offset"/>
+            <feMerge>
+                <feMergeNode in="r_offset"/>
+                <feMergeNode in="g_offset"/>
+                <feMergeNode in="b_offset"/>
+            </feMerge>
+        </filter>
+    </svg>
+
+    <div class="challenge-container">
+        <h1 class="glitch-text" data-text="Level_1:_Ez_Clap">Level_1: Ez_Clap</h1>
+        
+        <div class="challenge-content neon-border">
+            <p class="challenge-description">
+                Yo bestie! T'as capté le message crypté là? C'est un peu ratio comme chiffrement fr fr...
+                <br>
+                Indice: César aurait dit "skill issue"
+            </p>
+            
+            <div class="encrypted-message">
+                PGS{engvb_cyhf_g_rf_ahy}
+            </div>
+
+            <div class="flag-submission">
+                <input type="text" id="flagInput" class="neon-input" placeholder="CTF{flag}">
+                <button onclick="submitFlag()" class="neon-button">Submit Flag</button>
+            </div>
+
+            <div id="result" class="result-message"></div>
+
+            <div class="challenge-navigation">
+                <a href="../index.html" class="neon-button menu-button">
+                    <span class="button-icon">←</span>
+                    <span class="button-text">Menu principal</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function submitFlag() {
+            const flagInput = document.getElementById('flagInput');
+            const resultDiv = document.getElementById('result');
+            
+            try {
+                const response = await fetch('/api/verify/level1', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ flag: flagInput.value })
+                });
+                
+                const data = await response.json();
+                
+                resultDiv.textContent = data.message;
+                resultDiv.className = `result-message ${data.success ? 'success' : 'error'}`;
+                
+                if (data.success) {
+                    resultDiv.innerHTML += '<br>🔥 GIGACHAD DETECTED 🔥';
+                    if (data.nextLevel) {
+                        setTimeout(() => {
+                            window.location.href = `${data.nextLevel}.html`;
+                        }, 2000);
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                resultDiv.textContent = "Server skill issue bestie 😭";
+                resultDiv.className = 'result-message error';
+            }
+        }
+
+        // Permettre l'envoi avec la touche Enter
+        document.getElementById('flagInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                submitFlag();
+            }
+        });
+    </script>
+</body>
+</html> 

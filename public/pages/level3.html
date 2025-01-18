@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 3: Based - CryptoHack 2077</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/neon.css">
+</head>
+<body class="cyberpunk-bg">
+    <div class="challenge-container">
+        <h1 class="glitch-text" data-text="Level_3:_Based">Level_3: Based</h1>
+        
+        <div class="challenge-content neon-border">
+            <p class="challenge-description">
+                Literally crying rn, c'est du binaire bestie 😭
+                <br>
+                Decode ça si t'es pas un NPC
+            </p>
+            
+            <div class="encrypted-message">
+                01000011 01010100 01000110 01111011 01100011 01110010 01111001 01101001 01101110 01100111 01011111 01101001 01101110 01011111 01100010 01101001 01101110 01100001 01110010 01111001 01111101
+            </div>
+
+            <div class="flag-submission">
+                <input type="text" id="flagInput" class="neon-input" placeholder="CTF{flag}">
+                <button onclick="submitFlag()" class="neon-button">Submit Flag</button>
+            </div>
+
+            <div id="result" class="result-message"></div>
+
+            <div class="challenge-navigation">
+                <a href="../index.html" class="neon-button menu-button">
+                    <span class="button-icon">←</span>
+                    <span class="button-text">Menu principal</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function submitFlag() {
+            const flagInput = document.getElementById('flagInput');
+            const resultDiv = document.getElementById('result');
+            
+            try {
+                const response = await fetch('/api/verify/level3', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ flag: flagInput.value })
+                });
+                
+                const data = await response.json();
+                
+                resultDiv.textContent = data.message;
+                resultDiv.className = `result-message ${data.success ? 'success' : 'error'}`;
+                
+                if (data.success) {
+                    resultDiv.innerHTML += '<br>�� NO CAP FR FR 🔥';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                resultDiv.textContent = "Server skill issue bestie 😭";
+                resultDiv.className = 'result-message error';
+            }
+        }
+    </script>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+</body>
+</html> 

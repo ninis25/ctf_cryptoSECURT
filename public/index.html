@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoHack 2077</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/neon.css">
+</head>
+<body>
+    <!-- SVG Patterns -->
+    <svg style="width:0;height:0;position:absolute;" aria-hidden="true">
+        <!-- Pattern grille cyberpunk -->
+        <pattern id="cyber-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0,255,255,0.1)" stroke-width="1"/>
+        </pattern>
+        
+        <!-- Pattern glitch -->
+        <filter id="glitch">
+            <feColorMatrix in="SourceGraphic" mode="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r"/>
+            <feOffset in="r" dx="2" dy="-2" result="r_offset"/>
+            <feColorMatrix in="SourceGraphic" mode="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g"/>
+            <feOffset in="g" dx="-2" dy="2" result="g_offset"/>
+            <feColorMatrix in="SourceGraphic" mode="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b"/>
+            <feOffset in="b" dx="0" dy="0" result="b_offset"/>
+            <feMerge>
+                <feMergeNode in="r_offset"/>
+                <feMergeNode in="g_offset"/>
+                <feMergeNode in="b_offset"/>
+            </feMerge>
+        </filter>
+    </svg>
+
+    <div class="glitch-container">
+        <h1 class="glitch-text" data-text="CryptoHack_2077">CryptoHack_2077</h1>
+        <p class="neon-text subtitle">Prouve que t'es pas un NPC fr fr</p>
+        
+        <div class="meme-container neon-border">
+            <p id="meme-text" class="meme-text"></p>
+            <button onclick="getNewMeme()" class="neon-button meme-refresh">New ratio bestie</button>
+        </div>
+    </div>
+
+    <div class="challenges-grid">
+        <div class="challenge-card neon-border" onclick="location.href='pages/level1.html'">
+            <div class="card-header">
+                <h2 class="neon-text">Level 1: Ez Clap</h2>
+                <span class="difficulty">Skill Issue</span>
+            </div>
+            <div class="card-content">
+                <p>César aurait dit "ratio + t'es nul"</p>
+                <ul class="challenge-details">
+                    <li>🔒 Type: Substitution</li>
+                    <li>💀 Difficulté: Baby tier</li>
+                </ul>
+            </div>
+            <div class="challenge-status">Status: Not solved</div>
+        </div>
+
+        <div class="challenge-card neon-border" onclick="location.href='pages/level2.html'">
+            <div class="card-header">
+                <h2 class="neon-text">Level 2: Real</h2>
+                <span class="difficulty">Common L</span>
+            </div>
+            <div class="card-content">
+                <p>Vigenère + NPC = Skill issue bestie</p>
+                <ul class="challenge-details">
+                    <li>🔒 Type: Vigenère</li>
+                    <li>💀 Difficulté: Mid tier</li>
+                </ul>
+            </div>
+            <div class="challenge-status">Status: Locked</div>
+        </div>
+
+        <div class="challenge-card neon-border" onclick="location.href='pages/level3.html'">
+            <div class="card-header">
+                <h2 class="neon-text">Level 3: Based</h2>
+                <span class="difficulty">No Cap</span>
+            </div>
+            <div class="card-content">
+                <p>Literally crying in binary rn 😭</p>
+                <ul class="challenge-details">
+                    <li>🔒 Type: Binary</li>
+                    <li>💀 Difficulté: Based tier</li>
+                </ul>
+            </div>
+            <div class="challenge-status">Status: Locked</div>
+        </div>
+
+        <div class="challenge-card neon-border final-boss" onclick="location.href='pages/final.html'">
+            <div class="card-header">
+                <h2 class="neon-text">Final Boss: Gigachad</h2>
+                <span class="difficulty">Emotional Damage</span>
+            </div>
+            <div class="card-content">
+                <p>POV: Tu vas rage quit fr fr 💀</p>
+                <ul class="challenge-details">
+                    <li>🔒 Type: Base64 + Reverse</li>
+                    <li>💀 Difficulté: Gigachad tier</li>
+                </ul>
+            </div>
+            <div class="challenge-status">Status: Locked</div>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script>
+        async function getNewMeme() {
+            try {
+                const response = await fetch('/api/random-meme');
+                const data = await response.json();
+                const memeText = document.getElementById('meme-text');
+                
+                memeText.style.opacity = '0';
+                
+                setTimeout(() => {
+                    memeText.innerHTML = data.meme.replace(/\n/g, '<br>');
+                    memeText.style.opacity = '1';
+                }, 300);
+                
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            getNewMeme();
+            setInterval(getNewMeme, 10000);
+        });
+    </script>
+</body>
+</html> 
