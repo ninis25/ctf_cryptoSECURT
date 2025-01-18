@@ -479,4 +479,198 @@ body::before {
         var(--neon-text-color),
         transparent
     );
+}
+
+/* Modifier le style du titre principal */
+.glitch-container h1.glitch-text {
+    font-size: 4.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #0ff; /* Couleur néon cyan */
+    text-shadow: 
+        0 0 5px #0ff,
+        0 0 10px #0ff,
+        0 0 20px #0ff,
+        0 0 40px #0ff;
+    margin-bottom: 30px;
+    position: relative;
+    letter-spacing: 4px;
+}
+
+/* Effet de glitch */
+.glitch-container h1.glitch-text::before,
+.glitch-container h1.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch-container h1.glitch-text::before {
+    left: 2px;
+    text-shadow: -2px 0 #ff00ff;
+    animation: glitch-1 2s infinite linear alternate-reverse;
+}
+
+.glitch-container h1.glitch-text::after {
+    left: -2px;
+    text-shadow: 2px 0 #00ffff;
+    animation: glitch-2 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-1 {
+    0% {
+        clip: rect(20px, 1000px, 30px, 0);
+    }
+    20% {
+        clip: rect(40px, 1000px, 50px, 0);
+    }
+    40% {
+        clip: rect(60px, 1000px, 70px, 0);
+    }
+    60% {
+        clip: rect(80px, 1000px, 90px, 0);
+    }
+    80% {
+        clip: rect(100px, 1000px, 110px, 0);
+    }
+    100% {
+        clip: rect(120px, 1000px, 130px, 0);
+    }
+}
+
+@keyframes glitch-2 {
+    0% {
+        clip: rect(30px, 1000px, 40px, 0);
+    }
+    20% {
+        clip: rect(50px, 1000px, 60px, 0);
+    }
+    40% {
+        clip: rect(70px, 1000px, 80px, 0);
+    }
+    60% {
+        clip: rect(90px, 1000px, 100px, 0);
+    }
+    80% {
+        clip: rect(110px, 1000px, 120px, 0);
+    }
+    100% {
+        clip: rect(130px, 1000px, 140px, 0);
+    }
+}
+
+/* Style du sous-titre */
+.subtitle {
+    font-size: 1.5em;
+    color: #fff;
+    text-shadow: 
+        0 0 5px #0ff,
+        0 0 10px #0ff;
+    margin-top: 10px;
+    letter-spacing: 2px;
+    opacity: 0.8;
+}
+
+/* Ajouter un effet de soulignement animé */
+.glitch-container h1.glitch-text::after {
+    content: '';
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--neon-text-color), var(--neon-border-color));
+    animation: underlineExpand 1.5s ease forwards;
+}
+
+/* Animation du soulignement */
+@keyframes underlineExpand {
+    to {
+        width: 80%;
+    }
+}
+
+/* Ajouter des décorations autour du titre */
+.glitch-container h1.glitch-text::before {
+    content: '{ ';
+    position: absolute;
+    left: -20px;
+    color: var(--neon-text-color);
+    opacity: 0.7;
+}
+
+.glitch-container h1.glitch-text::after {
+    content: ' }';
+    position: absolute;
+    right: -20px;
+    color: var(--neon-text-color);
+    opacity: 0.7;
+}
+
+/* Effet de brillance sur le titre */
+.glitch-container h1.glitch-text {
+    position: relative;
+    overflow: hidden;
+}
+
+.glitch-container h1.glitch-text::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: shine 3s infinite;
+}
+
+/* Animation de brillance */
+@keyframes shine {
+    to {
+        left: 200%;
+    }
+}
+
+/* Ajuster le data-text pour le glitch */
+.glitch-container h1.glitch-text[data-text]::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 2px;
+    text-shadow: -2px 0 var(--glitch-color-1);
+    top: 0;
+    color: var(--neon-text-color);
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+    animation: glitch-effect 3s infinite linear alternate-reverse;
+}
+
+/* Animation de glitch */
+@keyframes glitch-effect {
+    0% {
+        clip: rect(44px, 900px, 56px, 0);
+    }
+    20% {
+        clip: rect(67px, 900px, 98px, 0);
+    }
+    40% {
+        clip: rect(32px, 900px, 54px, 0);
+    }
+    60% {
+        clip: rect(78px, 900px, 89px, 0);
+    }
+    80% {
+        clip: rect(23px, 900px, 45px, 0);
+    }
+    100% {
+        clip: rect(12px, 900px, 34px, 0);
+    }
 } 

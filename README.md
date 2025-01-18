@@ -1,4 +1,4 @@
-# 🌟 **SecuRT 2024 - CryptoHack 2077 - CTF Cryptographie**
+# 🌟 **SecuRT 2025 - CTF Cryptographie**
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?style=flat-square)
 ![Difficulty](https://img.shields.io/badge/difficulty-progressive-orange.svg?style=flat-square)
@@ -181,4 +181,4 @@ Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une PR ou à si
 
 ## 📝 **License**
 
-MIT License - © 2025 **SecuRT 2024** - Anisse Fouka
+MIT License - © 2025 **SecuRT 2025** - Anisse Fouka
